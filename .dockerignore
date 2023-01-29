@@ -2,6 +2,8 @@
 .node_modules
 .git
 
+config
+
 .env
 .eslintrc.json
 .editorconfig

@@ -3,8 +3,10 @@ services:
   aira:
     container_name: aira
     restart: always
-    #image: netetra/aira:latest
-    build: .
+    volumes:
+      - ./config/resolv.conf:/etc/resolv.conf:ro
+    image: netetra/aira:latest
+    #build: .
     env_file:
       - .env
     networks:
