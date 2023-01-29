@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  aira:
+    container_name: aira
+    restart: always
+    image: netetra/aira:latest
+    env_file:
+      - .env
+    networks:
+      - aira-network
+      - bridge
+    dns: 8.8.8.8
+
+networks:
+  aira-network:
+    name: aira-network
+    driver: bridge

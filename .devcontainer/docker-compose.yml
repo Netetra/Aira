@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  aira:
+    build:
+      dockerfile: ./dockerfiles/Aira/Dockerfile
+    volumes:
+      - ../:/Aira:rw
+    command: sleep infinity

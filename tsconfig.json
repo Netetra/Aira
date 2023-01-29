@@ -1,0 +1,16 @@
+{
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"],
+    "compilerOptions": {
+        "target": "ES2021",
+        "rootDir": "src", //ソースコードのルートを設定
+        "outDir": "./build", //build以下に出力
+        "removeComments": true, //コメント削除
+        "esModuleInterop": true,
+        "moduleResolution": "Node16",
+        "pretty": true,
+        "isolatedModules": true,
+        "importsNotUsedAsValues":"error",
+        "useDefineForClassFields": true
+    },
+}

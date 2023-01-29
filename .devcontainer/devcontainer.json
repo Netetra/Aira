@@ -1,0 +1,15 @@
+{
+    "name": "Aira",
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "aira",
+    "workspaceFolder": "/Aira",
+    "shutdownAction": "stopCompose",
+    "remoteUser": "ubuntu",
+    "extensions": [
+        "ms-azuretools.vscode-docker",
+        "ms-vscode.vscode-typescript-next",
+        "EditorConfig.EditorConfig",
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.js-debug-companion"
+    ]
+}

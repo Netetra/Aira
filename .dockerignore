@@ -1,0 +1,11 @@
+.devcontainer
+.node_modules
+.git
+
+.env
+.eslintrc.json
+.editorconfig
+.prettierrc
+.gitignore
+Dockerfile
+docker-compose.yml
