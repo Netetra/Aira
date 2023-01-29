@@ -5,12 +5,14 @@ COPY . .
 
 RUN npm ci && npm run build
 
-FROM node:18-slim
+FROM archlinux:latest
 WORKDIR /app
+
+RUN pacman -Syu --noconfirm && pacman -S archlinux-keyring nodejs-lts-hydrogen npm --noconfirm
 
 COPY --from=builder /source/build ./build
 COPY package*.json ./
 
 RUN npm install --only=production
 
-CMD ["node", "./build/index.js"]
+CMD ["npm", "start"]

@@ -3,7 +3,14 @@ services:
   aira:
     container_name: aira
     restart: always
-    image: netetra/aira:latest
+    #image: netetra/aira:latest
+    build: .
     env_file:
       - .env
+    networks:
+      - aira-network
 
+networks:
+  aira-network:
+    name: aira-network
+    driver: bridge
