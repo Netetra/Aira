@@ -13,6 +13,4 @@ COPY package*.json ./
 
 RUN npm install --only=production
 
-RUN echo nameserver 8.8.8.8 > /etc/resolv.conf
-
 CMD ["node", "./build/index.js"]
