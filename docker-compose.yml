@@ -3,7 +3,6 @@ services:
   aira:
     container_name: aira
     restart: always
-    volumes:
     image: netetra/aira:latest
     #build: .
     env_file:
