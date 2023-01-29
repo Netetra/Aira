@@ -4,7 +4,7 @@ import {
     DiscordEventHandler,
     DiscordInteractionCreateWorker,
 } from '../model/discord/index.js';
-import { interactionCreateWorkers } from './interactionCreate.js';
+import { interactionCreateWorkers } from '../worker/interactionCreate/index.js';
 
 function readyLog(botName: string, botId: string, version: string): void {
     console.info('');

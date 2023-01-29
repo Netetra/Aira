@@ -4,7 +4,6 @@ services:
     container_name: aira
     restart: always
     volumes:
-      - ./config/resolv.conf:/etc/resolv.conf:ro
     image: netetra/aira:latest
     #build: .
     env_file:

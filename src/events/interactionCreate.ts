@@ -1,19 +1,7 @@
 import { Client, Events, ChatInputCommandInteraction } from 'discord.js';
 
 import { DiscordEventHandler } from '../model/discord/index.js';
-import {
-    AboutCommand,
-    RandomInviteCommand,
-    SlotCommand,
-    HashCommand,
-} from '../service/interactionCreate/index.js';
-
-const interactionCreateWorkers = [
-    AboutCommand,
-    RandomInviteCommand,
-    SlotCommand,
-    HashCommand,
-];
+import { interactionCreateWorkers } from '../worker/interactionCreate/index.js';
 
 const InteractionCreateEvent = new DiscordEventHandler(
     Events.InteractionCreate,

@@ -42,7 +42,7 @@ const msgLinkToEmbed: DiscordMessageCreateWorker =
                         iconURL: getMessage.author.avatarURL(),
                     })
                     .setFooter({
-                        text: `サーバー:${guild.name} チャンネル:${channel.name}`,
+                        text: `${guild.name} ${channel.name}`,
                         iconURL: guild.bannerURL(),
                     })
                     .setTimestamp();

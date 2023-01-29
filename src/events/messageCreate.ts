@@ -1,9 +1,7 @@
 import { Client, Events, Message } from 'discord.js';
 
 import { DiscordEventHandler } from '../model/discord/index.js';
-import { msgLinkToEmbed } from '../service/messageCreate/index.js';
-
-const messageCreateWorkers = [msgLinkToEmbed];
+import { messageCreateWorkers } from '../worker/messageCreate/index.js';
 
 const MessageCreateEvent = new DiscordEventHandler(
     Events.MessageCreate,
