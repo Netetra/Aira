@@ -1,4 +1,5 @@
-import { Client, EmbedBuilder, ChatInputCommandInteraction } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
+import type { Client, ChatInputCommandInteraction } from 'discord.js';
 
 import { DiscordInteractionCreateWorker } from '../../model/discord/index.js';
 

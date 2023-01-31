@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 
 import { DiscordInteractionCreateWorker } from '../../model/discord/index.js';
+import type { ChatInputCommandInteraction, Client } from 'discord.js';
 
 function StringToMD5(str: string) {
     const md5 = crypto.createHash('md5').update(str, 'binary').digest('hex');
@@ -32,19 +33,21 @@ HashCommand.option
         option.setName('string').setDescription('文字列').setRequired(true),
     );
 
-HashCommand.setExecute(async (client, interaction) => {
-    switch (interaction.options.getString('hash')) {
-        case 'md5':
-            await interaction.reply(
-                StringToMD5(interaction.options.getString('string')),
-            );
-            break;
-        case 'sha256':
-            await interaction.reply(
-                StringToSHA256(interaction.options.getString('string')),
-            );
-            break;
-    }
-});
+HashCommand.setExecute(
+    async (client: Client, interaction: ChatInputCommandInteraction) => {
+        switch (interaction.options.getString('hash')) {
+            case 'md5':
+                await interaction.reply(
+                    StringToMD5(interaction.options.getString('string')),
+                );
+                break;
+            case 'sha256':
+                await interaction.reply(
+                    StringToSHA256(interaction.options.getString('string')),
+                );
+                break;
+        }
+    },
+);
 
 export { HashCommand };

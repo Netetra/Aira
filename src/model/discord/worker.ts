@@ -1,30 +1,36 @@
 import { SlashCommandBuilder } from 'discord.js';
 
-class DiscordMessageCreateWorker {
-    public regex: RegExp;
-    public mode: string;
-    public execute: Function;
-    constructor(regex: RegExp, execute: Function) {
-        this.regex = regex;
-        this.execute = execute;
+class DiscordBeseEventWorker {
+    private executeFunc: Function;
+    setExecute(executeFunc: Function) {
+        this.executeFunc = executeFunc;
     }
-    isMatch(content: string) {
-        return this.regex.test(content);
+    execute(...args) {
+        this.executeFunc(...args);
     }
 }
 
-class DiscordInteractionCreateWorker {
+class DiscordMessageCreateWorker extends DiscordBeseEventWorker {
+    private regex: RegExp;
+    constructor(regex: RegExp) {
+        super();
+        this.regex = regex;
+    }
+    isMatch(content: string):boolean {
+        if (content.match(this.regex)) return true
+        return false
+    }
+}
+
+class DiscordInteractionCreateWorker extends DiscordBeseEventWorker {
     public name: string;
     public option: SlashCommandBuilder;
-    public execute: Function;
     constructor(name: string, description: string) {
+        super();
         this.name = name;
         this.option = new SlashCommandBuilder()
             .setName(name)
             .setDescription(description);
-    }
-    setExecute(execute: Function) {
-        this.execute = execute;
     }
 }
 

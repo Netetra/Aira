@@ -3,6 +3,7 @@
     "exclude": ["node_modules"],
     "compilerOptions": {
         "target": "ES2021",
+        "ignoreDeprecations": "5.5",
         "rootDir": "src", //ソースコードのルートを設定
         "outDir": "./build", //build以下に出力
         "removeComments": true, //コメント削除

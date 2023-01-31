@@ -1,4 +1,5 @@
 import { DiscordInteractionCreateWorker } from '../../model/discord/index.js';
+import type { ChatInputCommandInteraction, Client } from 'discord.js';
 
 const SlotCommand = new DiscordInteractionCreateWorker(
     'slot',
@@ -12,49 +13,51 @@ SlotCommand.option.addNumberOption((option) =>
         .setRequired(true),
 );
 
-SlotCommand.setExecute(async (client, interaction) => {
-    const emoji: string[] = [
-        ':innocent: ',
-        ':poop: ',
-        ':face_with_symbols_over_mouth: ',
-        ':eyes: ',
-        ':monkey_face: ',
-        ':thinking: ',
-        ':radioactive: ',
-        ':computer: ',
-        ':cockroach: ',
-        ':face_vomiting: ',
-        ':thumbsdown: ',
-        ':nauseated_face: ',
-        ':sunglasses: ',
-        ':beer: ',
-        ':100: ',
-        ':pill: ',
-        ':gem: ',
-        ':fox: ',
-        ':hatching_chick: ',
-        ':strawberry: ',
-        ':squid: ',
-        ':chicken: ',
-        ':briefs: ',
-        ':smiling_imp: ',
-        ':avocado: ',
-        ':space_invader: ',
-        ':mechanical_arm: ',
-    ];
-    const n = interaction.options.getNumber('n') * 2 + 1;
-    if (n > 11) {
-        await interaction.reply('5以下の数値を入力してください');
-        return;
-    }
-    let slot = '';
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
-            slot = slot + emoji[Math.floor(Math.random() * emoji.length)];
+SlotCommand.setExecute(
+    async (client: Client, interaction: ChatInputCommandInteraction) => {
+        const emoji: string[] = [
+            ':innocent: ',
+            ':poop: ',
+            ':face_with_symbols_over_mouth: ',
+            ':eyes: ',
+            ':monkey_face: ',
+            ':thinking: ',
+            ':radioactive: ',
+            ':computer: ',
+            ':cockroach: ',
+            ':face_vomiting: ',
+            ':thumbsdown: ',
+            ':nauseated_face: ',
+            ':sunglasses: ',
+            ':beer: ',
+            ':100: ',
+            ':pill: ',
+            ':gem: ',
+            ':fox: ',
+            ':hatching_chick: ',
+            ':strawberry: ',
+            ':squid: ',
+            ':chicken: ',
+            ':briefs: ',
+            ':smiling_imp: ',
+            ':avocado: ',
+            ':space_invader: ',
+            ':mechanical_arm: ',
+        ];
+        const n = interaction.options.getNumber('n') * 2 + 1;
+        if (n > 11) {
+            await interaction.reply('5以下の数値を入力してください');
+            return;
         }
-        slot = slot + '\n';
-    }
-    await interaction.reply(slot);
-});
+        let slot = '';
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                slot = slot + emoji[Math.floor(Math.random() * emoji.length)];
+            }
+            slot = slot + '\n';
+        }
+        await interaction.reply(slot);
+    },
+);
 
 export { SlotCommand };

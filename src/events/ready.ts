@@ -1,10 +1,9 @@
-import { Client, Events, REST, Routes, SlashCommandBuilder } from 'discord.js';
+import { Events } from 'discord.js';
+import type { Client } from 'discord.js';
 
-import {
-    DiscordEventHandler,
-    DiscordInteractionCreateWorker,
-} from '../model/discord/index.js';
+import { DiscordEventHandler } from '../model/discord/index.js';
 import { interactionCreateWorkers } from '../worker/interactionCreate/index.js';
+import { commandRegister } from '../lib/discord.js';
 
 function readyLog(botName: string, botId: string, version: string): void {
     console.info('');
@@ -14,26 +13,6 @@ function readyLog(botName: string, botId: string, version: string): void {
     console.info(`Version: ${version}`);
     console.info('=============================');
     console.info('');
-}
-
-function CommandRegister(
-    DISCORD_BOT_TOKEN: string,
-    botId: string,
-    interactionCreateWorkers: DiscordInteractionCreateWorker[],
-): void {
-    const rest = new REST({ version: '10' }).setToken(DISCORD_BOT_TOKEN);
-    let slashCommandOptions: SlashCommandBuilder[] = [];
-    for (let i = 0; i < interactionCreateWorkers.length; i++) {
-        slashCommandOptions.push(interactionCreateWorkers[i].option);
-    }
-    (async () => {
-        await rest
-            .put(Routes.applicationCommands(botId), {
-                body: slashCommandOptions,
-            })
-            .then(() => console.log('[SUCCESS] Registered all guild commands.'))
-            .catch(console.error);
-    })();
 }
 
 const ReadyEvent = new DiscordEventHandler(
@@ -47,7 +26,7 @@ const ReadyEvent = new DiscordEventHandler(
         const version = process.env.npm_package_version ?? '不明';
         const joinServers = client.guilds.cache.size;
         readyLog(botName, botId, version);
-        CommandRegister(token, botId, interactionCreateWorkers);
+        commandRegister(token, botId, interactionCreateWorkers);
         setInterval(() => {
             client.user.setActivity({
                 name: `Severs:${joinServers} | v${version}`,

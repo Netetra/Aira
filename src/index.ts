@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
-import { Client, ClientEvents, GatewayIntentBits } from 'discord.js';
+import { Client, GatewayIntentBits } from 'discord.js';
+import type { ClientEvents } from 'discord.js';
 
 import { eventHandlers } from './events/index.js';
 
@@ -15,7 +16,6 @@ const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
 
 const client = new Client({ intents });
 
-// イベントハンドラー読み込み
 for (let i = 0; i < eventHandlers.length; i++) {
     const eventName = eventHandlers[i].eventName;
     if (eventHandlers[i].isOnce) {
@@ -23,7 +23,7 @@ for (let i = 0; i < eventHandlers.length; i++) {
             eventHandlers[i].execute(client, ...args),
         );
     } else {
-        client.on(eventHandlers[i].eventName, (...args) =>
+        client.on(eventHandlers[i].eventName, (...args: ClientEvents[]) =>
             eventHandlers[i].execute(client, ...args),
         );
     }
