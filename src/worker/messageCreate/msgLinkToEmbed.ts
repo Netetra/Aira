@@ -6,14 +6,14 @@ import { DiscordMessageCreateWorker } from '../../model/discord/worker.js';
 import { getImageURLs } from '../../lib/discord.js';
 
 const msgLinkToEmbed = new DiscordMessageCreateWorker(
-    /https:\/\/discord.com\/channels\/\d{18}\/\d{18}\/\d{19}/g,
+    /https:\/\/discord.com\/channels\/\d*\/\d*\/\d*/g,
 );
 
 msgLinkToEmbed.setExecute(async (client: Client, message: Message) => {
     let embeds: EmbedBuilder[] = [];
     const msgURLs = [
         ...message.content.matchAll(
-            /https:\/\/discord.com\/channels\/\d{18}\/\d{18}\/\d{19}/g,
+            /https:\/\/discord.com\/channels\/\d*\/\d*\/\d*/g,
         ),
     ].map((v) => v[0]);
     for (let i = 0; i < msgURLs.length; i++) {
